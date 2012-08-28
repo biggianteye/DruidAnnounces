@@ -1,0 +1,68 @@
+This is an overview of the events involved in spell-casting, including the information provided with each event.
+Events marked with a + are used by this addon.
+
+
+Instant Spells
+	success
+		UNIT_SPELLCAST_SENT (source(unit), spell(Name), target(Name))
+		+ SpellByAction (source(Player), spell(ID), target(Unit-guessed))
+		UNIT_SPELLCAST_SUCCEEDED (source(unit), spell(Name+ID))
+		+ COMBAT_LOG_EVENT_UNFILTERED, SPELL_CAST_SUCCESS (source(name+guid), spell(name+id), target(name+guid))
+	oos	
+		UNIT_SPELLCAST_SENT (source(unit), spell(Name), target(Name))
+		+ SpellByAction (source(Player), spell(ID), target(Unit-guessed))
+		+ COMBAT_LOG_EVENT_UNFILTERED, SPELL_CAST_FAILED (source(name+guid), spell(name+id), failtype)
+		UNIT_SPELLCAST_FAILED (source(unit), spell(Name+ID))
+	oor
+		+ COMBAT_LOG_EVENT_UNFILTERED, SPELL_CAST_FAILED (source(name+guid), spell(name+id), failtype)
+		UNIT_SPELLCAST_FAILED (source(unit), spell(Name+ID))
+		+ SpellByAction (source(Player), spell(ID), target(Unit-guessed))
+
+Cast-Time Spells
+	start
+		UNIT_SPELLCAST_SENT (source(unit), spell(Name), target(Name))
+		+ SpellByAction (source(Player), spell(ID), target(Unit-guessed))
+		UNIT_SPELLCAST_START (source(unit), spell(Name+ID))
+		+ COMBAT_LOG_EVENT_UNFILTERED, SPELL_CAST_START (source(name+guid), spell(name+id))
+	success
+		+ UNIT_SPELLCAST_SUCCEEDED (source(unit), spell(Name+ID))
+		UNIT_SPELLCAST_STOP (source(unit), spell(Name+ID))
+	fail
+		UNIT_SPELLCAST_INTERRUPT (source(unit), spell(Name+ID))
+		UNIT_SPELLCAST_STOP (source(unit), spell(Name+ID))
+		UNIT_SPELLCAST_INTERRUPT (source(unit), spell(Name+ID))
+		COMBAT_LOG_EVENT_UNFILTERED, SPELL_CAST_FAILED (source(name+guid), spell(name+id), failtype))
+		UNIT_SPELLCAST_INTERRUPT (source(unit), spell(Name+ID))
+		UNIT_SPELLCAST_INTERRUPT (source(unit), spell(Name+ID))
+		
+	oos	
+		UNIT_SPELLCAST_SENT (source(unit), spell(Name), target(Name))
+		+ SpellByAction (source(Player), spell(ID), target(Unit-guessed))
+		+ COMBAT_LOG_EVENT_UNFILTERED, SPELL_CAST_FAILED (source(name+guid), spell(name+id), failtype)
+		UNIT_SPELLCAST_FAILED (source(unit), spell(Name+ID))
+	oor
+		+ COMBAT_LOG_EVENT_UNFILTERED, SPELL_CAST_FAILED (source(name+guid), spell(name+id), failtype)
+		UNIT_SPELLCAST_FAILED (source(unit), spell(Name+ID))
+		+ SpellByAction (source(Player), spell(ID), target(Unit-guessed))
+
+Channel Spells
+		UNIT_SPELLCAST_SENT (source(unit), spell(Name), target(Name)?)
+		SpellByAction (source(Player), spell(ID), target(Unit-guessed)?)
+		UNIT_SPELLCAST_CHANNEL_START (source(unit), spell(Name+ID))
+		COMBAT_LOG_EVENT_UNFILTERED, SPELL_AURA_APPLIED  (source(name+guid), spell(name+id), target(name+guid))
+		SPELL_AURA_START (spell(Name))
+		UNIT_SPELLCAST_SUCCEEDED (source(unit), spell(Name+ID))
+		COMBAT_LOG_EVENT_UNFILTERED, SPELL_CAST_SUCCESS (source(name+guid), spell(name+id))
+		---
+		COMBAT_LOG_EVENT_UNFILTERED, SPELL_HEAL (source(name+guid), spell(name+id),  target(name+guid))
+		COMBAT_LOG_EVENT_UNFILTERED, SPELL_AURA_APPLIED  (source(name+guid), spell(name+id[wrong ID!]),  target(name+guid))
+		SPELL_AURA_START (spell(Name))
+		UNIT_SPELLCAST_SUCCEEDED (source(unit), spell(Name+ID))
+		COMBAT_LOG_EVENT_UNFILTERED, SPELL_CAST_SUCCESS (source(name+guid), spell(name+id))
+		---
+		COMBAT_LOG_EVENT_UNFILTERED, SPELL_HEAL (source(name+guid), spell(name+id),  target(name+guid))
+		COMBAT_LOG_EVENT_UNFILTERED, SPELL_AURA_APPLIED_DOSE  (source(name+guid), spell(name+id),  target(name+guid))
+		UNIT_SPELLCAST_SUCCEEDED (source(unit), spell(Name+ID))
+		COMBAT_LOG_EVENT_UNFILTERED, SPELL_CAST_SUCCESS (source(name+guid), spell(name+id))
+		COMBAT_LOG_EVENT_UNFILTERED, SPELL_PERIODIC_HEAL (source(name+guid), spell(name+id),  target(name+guid))
+	

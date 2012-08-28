@@ -1,0 +1,9 @@
+## Interface: 40200
+## Title: DruidAnnounces
+## Version: 4.2
+## Notes: Sends useful whispers & raid-announces for druid spells like innervate and combat-rez.
+## Author: Neetha (EU-Destromath)
+## eMail: Not Provided
+## URL: http://www.wowinterface.com/downloads/info19824-DruidAnnounces.html
+DruidAnnounces.lua
+Setup.lua
