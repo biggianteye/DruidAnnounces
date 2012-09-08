@@ -70,8 +70,8 @@ DruidAnnounces.triggerAnnouncement = function(spellID, castStatus, targetName, t
     DruidAnnounces.DebugPrint(string.format("Spell reaction triggered. spellName: |cffffffff%s|r, castStatus: |cffffffff%s|r, targetName |cffffffff%s|r, targetIsPlayer |cffffffff%s|r", tostring(GetSpellInfo(spellID)), tostring(castStatus), tostring(targetName), tostring(targetIsPlayer)))
     
     local chatType = "SAY"
-    if (GetNumPartyMembers()>0) then chatType = "PARTY" end
-    if (GetNumRaidMembers()>0) then chatType = "RAID" end
+    if (GetNumSubgroupMembers()>0) then chatType = "PARTY" end
+    if (GetNumGroupMembers()>0) then chatType = "RAID" end
     
     -- Rebirth
     if (spellID==20484 and targetIsPlayer) then
@@ -112,8 +112,8 @@ if (GetLocale() == "deDE") then
     DruidAnnounces.triggerAnnouncement = function(spellID, castStatus, targetName, targetIsPlayer)
     
     local chatType = "SAY"
-    if (GetNumPartyMembers()>0) then chatType = "PARTY" end
-    if (GetNumRaidMembers()>0) then chatType = "RAID" end
+    if (GetNumSubgroupMembers()>0) then chatType = "PARTY" end
+    if (GetNumGroupMembers()>0) then chatType = "RAID" end
     
         DruidAnnounces.DebugPrint(string.format("Spell reaction triggered. spellName: |cffffffff%s|r, castStatus: |cffffffff%s|r, targetName |cffffffff%s|r, targetIsPlayer |cffffffff%s|r", tostring(GetSpellInfo(spellID)), tostring(castStatus), tostring(targetName), tostring(targetIsPlayer)))
         
