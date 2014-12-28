@@ -70,8 +70,14 @@ DruidAnnounces.triggerAnnouncement = function(spellID, castStatus, targetName, t
     DruidAnnounces.DebugPrint(string.format("Spell reaction triggered. spellName: |cffffffff%s|r, castStatus: |cffffffff%s|r, targetName |cffffffff%s|r, targetIsPlayer |cffffffff%s|r", tostring(GetSpellInfo(spellID)), tostring(castStatus), tostring(targetName), tostring(targetIsPlayer)))
     
     local chatType = "SAY"
-    if (GetNumSubgroupMembers()>0) then chatType = "PARTY" end
-    if (GetNumGroupMembers()>0) then chatType = "RAID" end
+    local inInstanceGroup = IsInGroup(LE_PARTY_CATEGORY_INSTANCE)
+    if inInstanceGroup then
+      chatType = "INSTANCE_CHAT"
+    elseif IsInRaid() then
+      chatType = "RAID"
+    elseif IsInGroup() then 
+      chatType = "PARTY"
+    end
     
     -- Rebirth
     if (spellID==20484 and targetIsPlayer) then
