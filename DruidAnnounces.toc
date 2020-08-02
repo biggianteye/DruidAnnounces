@@ -1,4 +1,4 @@
-## Interface: 70000
+## Interface: 80000
 ## Title: DruidAnnounces
 ## Version: 4.2
 ## Notes: Sends useful whispers & raid-announces for druid spells like innervate and combat-rez.
